@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.Robot;
 public abstract class FastAuto extends LinearOpMode {
     public abstract void routine() throws InterruptedException;
     private final ElapsedTime runtime = new ElapsedTime();
-    public Robot robot = null;
+    public Robot robot = new Robot();
 
     @Override
     public void runOpMode() throws InterruptedException {

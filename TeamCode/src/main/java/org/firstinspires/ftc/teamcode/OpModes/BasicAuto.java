@@ -9,6 +9,6 @@ import org.firstinspires.ftc.teamcode.Commands.DriveChassisTimed;
 public class BasicAuto extends FastAuto {
     @Override
     public void routine() throws InterruptedException {
-        runCommand(new DriveChassisTimed(robot,0,2,3));
+        runCommand(new DriveChassisTimed(robot,0,0.5,3));
     }
 }
