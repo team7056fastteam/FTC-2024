@@ -9,8 +9,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class TestOpMode extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
-        //Servo taylorSwift = hardwareMap.get(Servo.class, "taylorswift");
-        DcMotor kurt = hardwareMap.get(DcMotor.class, "balls");
+        Servo taylor = hardwareMap.get(Servo.class, "taylor");
+        Servo swift = hardwareMap.get(Servo.class, "swift");
+        //DcMotor kurt = hardwareMap.get(DcMotor.class, "balls");
 
 
         waitForStart();
@@ -18,7 +19,20 @@ public class TestOpMode extends LinearOpMode {
         //taylorSwift.setPosition(1);
 
         while(opModeIsActive()){
-            kurt.setPower(-gamepad1.left_stick_y);
+            //kurt.setPower(-gamepad1.left_stick_y);
+
+           if(gamepad1.dpad_left){
+               taylor.setPosition(0);
+               swift.setPosition(1);
+           }
+           else if(gamepad1.dpad_right){
+               taylor.setPosition(1);
+               swift.setPosition(0);
+           }
+           else{
+               taylor.setPosition(0.5);
+               swift.setPosition(0.5);
+           }
         }
     }
 }
