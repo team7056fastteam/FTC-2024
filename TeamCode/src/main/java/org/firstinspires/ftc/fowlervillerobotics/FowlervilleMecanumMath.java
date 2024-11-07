@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.fowlervillerobotics;
 
-public class FastMecanumMath {
+public class FowlervilleMecanumMath {
     public static ChassisState getChassisStateFromPower(double x, double y, double r, double heading){
         double rotX = x * Math.cos(-heading) - y * Math.sin(-heading);
         double rotY = x * Math.sin(-heading) + y * Math.cos(-heading);

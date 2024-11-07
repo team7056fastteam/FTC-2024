@@ -6,14 +6,14 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Robot;
 
 
-public abstract class FastAuto extends LinearOpMode {
+public abstract class FowlervilleAuto extends LinearOpMode {
     public abstract void routine() throws InterruptedException;
     private final ElapsedTime runtime = new ElapsedTime();
     public Robot robot = new Robot();
 
     @Override
     public void runOpMode() throws InterruptedException {
-        robot.createRobot();
+        robot.createRobot(hardwareMap);
         waitForStart();
         try {
             routine();
@@ -31,7 +31,7 @@ public abstract class FastAuto extends LinearOpMode {
         return opModeIsActive();
     }
 
-    public void runCommand(FastCommand command) throws InterruptedException{
+    public void runCommand(FowlervilleCommand command) throws InterruptedException{
         isActiveWithThrow();
         command.init();
 

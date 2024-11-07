@@ -5,33 +5,31 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.fowlervillerobotics.FowlervilleCommand;
 import org.firstinspires.ftc.teamcode.Robot;
 
-public class DriveChassisTimed extends FowlervilleCommand {
-    private Robot robot = null;
+public class TestCommand extends FowlervilleCommand {
+    Robot robot = null;
+    double pos;
     private final ElapsedTime runtime = new ElapsedTime();
-    double xPower = 0;
-    double yPower = 0;
-    double seconds = 0;
-    public DriveChassisTimed(Robot robot, double xPower, double yPower, double seconds){
+    public TestCommand(Robot robot, double pos){
         this.robot = robot;
+        this.pos = pos;
     }
     @Override
     public void init() {
         runtime.reset();
-        robot.arcadeDrive(0,0,0);
+        robot.setHamPos(pos);
     }
 
     @Override
     public void run() {
-        robot.arcadeDrive(xPower,yPower,0);
+
     }
 
     @Override
     public Boolean isFinished() {
-        return runtime.seconds() > seconds;
+        return runtime.seconds() >= 1;
     }
 
     @Override
     public void end() {
-        robot.arcadeDrive(0,0,0);
     }
 }
