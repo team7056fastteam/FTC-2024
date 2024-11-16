@@ -17,27 +17,34 @@ public class Robot{
     private DcMotor rightFrontDrive = null;
     private DcMotor rightRearDrive = null;
 
-    private Servo ham = null;
-
     private IMU imu = null;
 
-    public void createRobot(HardwareMap robotHardwareMap) {
-        ham = robotHardwareMap.get(Servo.class,"ham");
-        //leftFrontDrive = hardwareMap.get(DcMotor.class, "0");
-        //leftRearDrive = hardwareMap.get(DcMotor.class, "1");
-        //rightFrontDrive = hardwareMap.get(DcMotor.class, "2");
-        //rightRearDrive = hardwareMap.get(DcMotor.class, "3");
+    public Intake _intake = null;
+    public Arm _arm = null;
 
-        //leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
-        //leftRearDrive.setDirection(DcMotor.Direction.REVERSE);
-        //rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
-        //rightRearDrive.setDirection(DcMotor.Direction.FORWARD);
+    public void createRobot(HardwareMap hardwareMap) {
+        //ham = robotHardwareMap.get(Servo.class,"ham");
+        leftFrontDrive = hardwareMap.get(DcMotor.class, "LF");
+        leftRearDrive = hardwareMap.get(DcMotor.class, "LR");
+        rightFrontDrive = hardwareMap.get(DcMotor.class, "RF");
+        rightRearDrive = hardwareMap.get(DcMotor.class, "RR");
 
-//        imu = hardwareMap.get(IMU.class, "imu");
-//        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
-//                RevHubOrientationOnRobot.LogoFacingDirection.UP,
-//                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
-//        imu.initialize(parameters);
+        leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftRearDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightRearDrive.setDirection(DcMotor.Direction.FORWARD);
+
+        imu = hardwareMap.get(IMU.class, "imu");
+        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
+                RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
+                RevHubOrientationOnRobot.UsbFacingDirection.UP));
+        imu.initialize(parameters);
+
+        _intake = new Intake();
+        _intake.createIntake(hardwareMap);
+
+        _arm = new Arm();
+        _arm.createArm(hardwareMap);
     }
 
     public void arcadeDrive(double xPower, double yPower, double rPower){
@@ -52,7 +59,12 @@ public class Robot{
         return imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
     }
 
-    public void setHamPos(double pos) {
-        ham.setPosition(pos);
+    public double getHeadingInDegrees(){
+        return imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
     }
+
+    public void resetHeading(){
+        imu.resetYaw();
+    }
+
 }

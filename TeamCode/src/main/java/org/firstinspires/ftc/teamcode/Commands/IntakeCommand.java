@@ -1,22 +1,20 @@
 package org.firstinspires.ftc.teamcode.Commands;
 
-import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.fowlervillerobotics.FowlervilleCommand;
+import org.firstinspires.ftc.teamcode.Intake;
 import org.firstinspires.ftc.teamcode.Robot;
 
-public class TestCommand extends FowlervilleCommand {
+public class IntakeCommand extends FowlervilleCommand {
+    Intake.IntakeStates state = Intake.IntakeStates.kIdle;
     Robot robot = null;
-    double pos;
-    private final ElapsedTime runtime = new ElapsedTime();
-    public TestCommand(Robot robot, double pos){
+    public IntakeCommand(Robot robot, Intake.IntakeStates state){
         this.robot = robot;
-        this.pos = pos;
+        this.state = state;
     }
     @Override
     public void init() {
-        runtime.reset();
-        robot.setHamPos(pos);
+        robot._intake.setIntakeState(state);
+        robot._intake.run();
     }
 
     @Override
@@ -26,10 +24,11 @@ public class TestCommand extends FowlervilleCommand {
 
     @Override
     public Boolean isFinished() {
-        return runtime.seconds() >= 1;
+        return true;
     }
 
     @Override
     public void end() {
+
     }
 }

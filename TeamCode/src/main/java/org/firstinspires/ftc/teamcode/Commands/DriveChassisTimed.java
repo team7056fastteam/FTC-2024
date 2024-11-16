@@ -13,6 +13,9 @@ public class DriveChassisTimed extends FowlervilleCommand {
     double seconds = 0;
     public DriveChassisTimed(Robot robot, double xPower, double yPower, double seconds){
         this.robot = robot;
+        this.xPower = xPower;
+        this.yPower = yPower;
+        this.seconds = seconds;
     }
     @Override
     public void init() {

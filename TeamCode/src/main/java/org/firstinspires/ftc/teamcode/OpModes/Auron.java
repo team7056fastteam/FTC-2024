@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp(name="Auron", group="TeleOp")
+//@TeleOp(name="Auron", group="TeleOp")
 public class Auron extends LinearOpMode {
     //Servo taylor = null;
     //Servo swift = null;
